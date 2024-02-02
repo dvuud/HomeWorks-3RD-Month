@@ -68,6 +68,11 @@ async def adres(message:types.Message):
     await message.answer("ул. Исы Ахунбаева 97а")
     await message.answer_location(42.84331569978354, 74.60981772293441)
 
+
+@dp.message_handler()
+async def adres(message:types.Message):
+    await message.answer("Я вас не понимаю /start ")
+
 @dp.message_handler(text='Заказать еду')
 async def zakaz(message:types.Message):
     await Order.name.set()
