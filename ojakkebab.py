@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher, types, executor
+from aiogram import Bot, Dispatcher, types, executor 
 import sqlite3
 import logging
 from aiogram.dispatcher.filters.state import State, StatesGroup
@@ -69,10 +69,6 @@ async def adres(message:types.Message):
     await message.answer_location(42.84331569978354, 74.60981772293441)
 
 
-@dp.message_handler()
-async def adres(message:types.Message):
-    await message.answer("Я вас не понимаю /start ")
-
 @dp.message_handler(text='Заказать еду')
 async def zakaz(message:types.Message):
     await Order.name.set()
@@ -117,4 +113,8 @@ async def process_order(message:types.Message, state: FSMContext):
     await message.answer("Анкета на заказ принята!")
     await state.finish()
 
+@dp.message_handler()
+async def adres(message:types.Message):
+    await message.reply("Я вас не понимаю /start")
+    
 executor.start_polling(dp, skip_updates=True)

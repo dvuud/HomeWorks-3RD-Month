@@ -17,18 +17,11 @@ async def gues_num(message:types.Message):
             await message.reply("Я вас не понимаю, введите число!")
 
         random_num = random.randint(1,3)
-        if user_num == random_num and user_num < 4:
+        if user_num == random_num:
             await message.reply("Правильно вы отгадали!")
             await message.answer_photo('https://media.makeameme.org/created/you-win-nothing-b744e1771f.jpg')
         else:
             await message.reply("Неправильно, повторите заново!")
             await message.answer_photo('https://media.makeameme.org/created/sorry-you-lose.jpg')
         
-        while True:
-            if user_num > 3:
-                await message.reply("Я загадал число от 1 до 3, не больше!!!")
-                break
-            else:
-                continue
-
 executor.start_polling(dp)
