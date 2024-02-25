@@ -2,7 +2,6 @@ from aiogram import Bot, Dispatcher, types, executor
 import logging 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import requests
-from tiktok import current_id, video_url, video_api, vd_file
 # from aiogram.dispatcher import FSMContext
 # from aiogram.dispatcher.filters.state import state, StatesGroup
 # import requests, os

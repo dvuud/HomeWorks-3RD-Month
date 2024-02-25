@@ -49,16 +49,18 @@ async def start(message: types.Message):
         
         if user is not None:
             await message.answer(
-                """Добро пожаловать в банк!
-                Для пополнения и просмотра текущего баланса введите: /balance,
-                Для вывода средств: /transfer"""
+"""Добро пожаловать в банк!
+Для пополнения и просмотра текущего баланса введите: /balance,
+Для вывода средств: /transfer
+Если вы не поняли и вам нужна помощь /help"""
             )
         else:
-            await message.answer(
-                """Добро пожаловать в банк!
-                Для пополнения и просмотра текущего баланса нажмите: /balance,
-                Для вывода средств: /transfer
-                Но перед этим давайте зарегистрируемся!"""
+            await message.answer("""
+Добро пожаловать в банк!
+Для пополнения и просмотра текущего баланса нажмите: /balance,
+Для вывода средств: /transfer
+Если вы не поняли и вам нужна помощь /help
+Но перед этим давайте зарегистрируемся!"""
             )
             await message.answer("Введите полное имя?")
             await StateUser.full_name.set()
@@ -191,5 +193,14 @@ async def summma(message: types.Message, state: FSMContext):
                 await message.answer("Перевод выполнен!")
             else:
                 await message.answer("Недостаточно средств, чтобы перевести!")
+                
+@dp.message_handler()
+async def not_found(message:types.Message):
+    await message.answer("Я вас не понимаю /start")
+    
+@dp.message_handler(commands='help')
+async def help(message:types.Message):
+    await message.amswer("""Это банк в котором вы можете отправить деньги кому-то, пополнить свой баланс, 
+мы работаем на протяжении 10 лет и рады каждому пользователю нашего банка""")
 
 executor.start_polling(dp, skip_updates=True)
